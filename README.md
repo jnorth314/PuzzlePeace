@@ -8,8 +8,8 @@ The solver works by checking if a block is able to be swapped. If a move is poss
 
 There are two parts to the JSON file used in solving the puzzles in `main.py`
 
-`playfield` - A 2D array of blocks with a width of 6 and height of 12. Zero represents an empty square, non-zero represents a block.
-`moves` - Number of moves that the game suggests the puzzle can be beaten in.
+* `playfield` - A 2D array of blocks with a width of 6 and height of 12. Zero represents an empty square, non-zero represents a block.
+* `moves` - Number of moves that the game suggests the puzzle can be beaten in.
 
 Here is an example of a very simple puzzle:
 ```
