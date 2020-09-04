@@ -10,26 +10,20 @@ def clear_matches(playfield):
     # Create a copy of the playfield
     temp = [i[:] for i in playfield]
 
-    # Horizontal
     for y in range(12):
-        for x in range(6 - 2):
-            # Empty blocks don't count as a match of 3
-            if (playfield[y][x] == 0):
-                continue
-
-            if (playfield[y][x] == playfield[y][x + 1] and playfield[y][x] == playfield[y][x + 2]):
-                temp[y][x] = 0
-                temp[y][x + 1] = 0
-                temp[y][x + 2] = 0
-
-    # Vertical
-    for y in range(12 - 2):
         for x in range(6):
             # Empty blocks don't count as a match of 3
             if (playfield[y][x] == 0):
                 continue
 
-            if (playfield[y][x] == playfield[y + 1][x] and playfield[y][x] == playfield[y + 2][x]):
+            # Horizontal
+            if (x < (6 - 2) and playfield[y][x] == playfield[y][x + 1] and playfield[y][x] == playfield[y][x + 2]):
+                temp[y][x] = 0
+                temp[y][x + 1] = 0
+                temp[y][x + 2] = 0
+
+            # Vertical
+            if (y < (12 - 2) and playfield[y][x] == playfield[y + 1][x] and playfield[y][x] == playfield[y + 2][x]):
                 temp[y][x] = 0
                 temp[y + 1][x] = 0
                 temp[y + 2][x] = 0
