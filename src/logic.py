@@ -76,9 +76,7 @@ def is_solved(playfield):
     # This will only work if block ids are all negative or all positive, no mix!
     return sum(map(sum, playfield)) == 0
 
-    #for y in range(12):
-    #    for x in range(6):
-    #        if (playfield[y][x] != 0):
-    #            return False
+    # Alternatively use this, it is a little slower
+    #temp = [[0 for x in range(6)] for y in range(12)]
     #
-    #return True
+    #return temp == playfield

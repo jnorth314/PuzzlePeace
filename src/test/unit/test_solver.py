@@ -1,5 +1,5 @@
 import sys
-sys.path.insert(0, "..") # solver.py is in the directory above!
+sys.path.insert(0, "../..") # solver.py is in the directory above!
 
 import unittest
 
