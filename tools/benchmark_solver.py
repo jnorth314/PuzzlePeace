@@ -1,5 +1,5 @@
 import sys
-sys.path.insert(0, "../src") # solver.py is in the src directory!
+sys.path.insert(0, "../src/solver") # solver.py is in the src directory!
 
 import cProfile
 import json

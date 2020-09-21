@@ -10,12 +10,13 @@ import solver
 class TestPuzzles(unittest.TestCase):
     def test_all_puzzles(self):
         """
+        Test all of the sample puzzles given since they should all be solvable!
         """
 
-        dir = os.path.join(os.path.dirname(__file__), "../../../puzzles")
+        dir = os.path.join(os.path.dirname(__file__), "../../../../puzzles")
 
         for p in os.listdir(dir):
-            filename = "../../../puzzles/{}".format(p)
+            filename = "../../../../puzzles/{}".format(p)
             with open(filename) as f:
                 try:
                     puzzle = json.load(f)
