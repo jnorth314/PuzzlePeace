@@ -27,7 +27,7 @@ class TestImages(unittest.TestCase):
             if (img is None):
                 continue
 
-            filename = "../../../../puzzles/{}".format(p)
+            filename = "../../../../puzzles/{}.json".format(os.path.splitext(p)[0])
             with open(filename) as f:
                 try:
                     puzzle = json.load(f)
