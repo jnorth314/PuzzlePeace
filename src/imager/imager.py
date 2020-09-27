@@ -28,7 +28,7 @@ def img_to_cursor(img):
     horizontally, the position of the left block is what is returned.
     """
 
-    c = (255, 255, 255) # Cursor color
+    c = (255, 251, 255) # Cursor color
 
     for y in range(12):
         for x in range(6 - 1):
@@ -60,12 +60,12 @@ def img_to_playfield(img):
     playfield = [[0 for x in range(6)] for y in range(12)]
 
     colors = [
-        (0, 0, 255),     # Red
-        (0, 255, 0),     # Green
-        (255, 0, 255),   # Purple
-        (0, 255, 255),   # Yellow
-        (255, 255, 0),   # Cyan
-        (255, 128, 64)   # Dark Blue (These blocks have a weird center color)
+        (16, 16, 255),  # Red
+        (0, 251, 0),    # Green
+        (255, 26, 255), # Magenta
+        (0, 251, 255),  # Yellow
+        (255, 251, 0),  # Cyan
+        (255, 115, 66)  # Blue
     ]
 
     for y in range(12):
@@ -92,13 +92,13 @@ def playfield_to_img(playfield):
     img = numpy.zeros((16 * 12, 16 * 6, 3), numpy.uint8)
 
     colors = [
-        (255, 255, 255), # White
-        (0, 0, 255),     # Red
-        (0, 255, 0),     # Green
-        (255, 0, 255),   # Purple
-        (0, 255, 255),   # Yellow
-        (255, 255, 0),   # Cyan
-        (255, 0, 0)      # Dark Blue
+        (0, 0, 0),      # Black
+        (16, 16, 255),  # Red
+        (0, 251, 0),    # Green
+        (255, 26, 255), # Magenta
+        (0, 251, 255),  # Yellow
+        (255, 251, 0),  # Cyan
+        (255, 115, 66)  # Blue
     ]
 
     for y in range(12):
