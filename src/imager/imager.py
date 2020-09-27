@@ -81,6 +81,28 @@ def img_to_playfield(img):
 
     return playfield
 
+def cursor_to_img(cursor):
+    """
+    Create an image of the cursor position to be displayed to the user!
+
+    @param cursor: Position of the cursor.
+    @return: Image of the cursor position in the playfield.
+    """
+
+    img = numpy.zeros((16 * 12, 16 * 6, 3), numpy.uint8)
+
+    x, y = cursor # These coordinates are of the left block on the cursor
+
+    # p1 is the top left of the cursor
+    # p2 is the bottom right of the cursor
+    p1 = (16 * x, 16 * y)
+    p2 = (16 * (x + 2) - 1, 16 * (y + 1) - 1)
+    c = (255, 251, 255) # Cursor color
+
+    cv2.rectangle(img, p1, p2, c, 2)
+
+    return img
+
 def playfield_to_img(playfield):
     """
     Create an image of the playfield to be displayed to the user!
@@ -110,5 +132,30 @@ def playfield_to_img(playfield):
             c = colors[playfield[y][x]]
 
             cv2.rectangle(img, p1, p2, c, cv2.FILLED)
+
+    return img
+
+def combined_to_img(playfield, cursor):
+    """
+    Create an image of both the playfield and cursor position to be displayed to
+    the user!
+
+    @param playfield: State of the playfield.
+    @param cursor: Position of the cursor.
+    @return: Image of the playfield with the cursor.
+    """
+
+    # We can just take the image from here and draw the cursor on top of it
+    img = playfield_to_img(playfield)
+
+    x, y = cursor # These coordinates are of the left block on the cursor
+
+    # p1 is the top left of the cursor
+    # p2 is the bottom right of the cursor
+    p1 = (16 * x, 16 * y)
+    p2 = (16 * (x + 2) - 1, 16 * (y + 1) - 1)
+    c = (255, 251, 255) # Cursor color
+
+    cv2.rectangle(img, p1, p2, c, 2)
 
     return img

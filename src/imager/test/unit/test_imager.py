@@ -26,6 +26,15 @@ class TestImager(unittest.TestCase):
 
         playfield = imager.img_to_playfield(img)
 
+    def test_cursor_to_img(self):
+        """
+        Test creating an image from a cursor position.
+        """
+
+        cursor = (0, 0)
+
+        img = imager.cursor_to_img(cursor)
+
     def test_playfield_to_img(self):
         """
         Test creating an image from a playfield.
@@ -34,6 +43,16 @@ class TestImager(unittest.TestCase):
         playfield = [[0 for x in range(6)] for y in range(12)]
 
         img = imager.playfield_to_img(playfield)
+
+    def test_combined_to_img(self):
+        """
+        Test creating an image from a playfield and cursor position.
+        """
+
+        cursor = (0, 0)
+        playfield = [[0 for x in range(6)] for y in range(12)]
+
+        img = imager.combined_to_img(playfield, cursor)
 
     def test_get_normalized_distance(self):
         """
