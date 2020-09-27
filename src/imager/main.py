@@ -18,6 +18,7 @@ def main():
             continue
 
         playfield = imager.img_to_playfield(img)
+        cursor = imager.img_to_cursor(img)
 
         # Concatenate the images side by side for easy comparison
         img = cv2.hconcat([img, imager.playfield_to_img(playfield)])

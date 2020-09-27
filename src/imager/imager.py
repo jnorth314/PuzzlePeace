@@ -19,6 +19,35 @@ def get_normalized_distance(c1, c2):
 
     return dt / ((255**2 + 255**2 + 255**2) ** 0.5) # Normalize it
 
+def img_to_cursor(img):
+    """
+    Convert the image from the game into the cursor position.
+
+    @param img: Image of the playfield.
+    @return: Cursor's position. Since the cursor takes the space of two blocks
+    horizontally, the position of the left block is what is returned.
+    """
+
+    c = (255, 255, 255) # Cursor color
+
+    for y in range(12):
+        for x in range(6 - 1):
+            p1 = img[16 * y][16 * x]                     # Top Left
+            p2 = img[16 * y][16 * (x + 2) - 1]           # Top Right
+            p3 = img[16 * (y + 1) - 1][16 * x]           # Bottom Left
+            p4 = img[16 * (y + 1) - 1][16 * (x + 2) - 1] # Bottom Right
+
+            # Checking if each of those sections are close to the cursor color,
+            # if they are we will return the coordinates. 0.1 is an arbitrary
+            # distance chosen.
+            if (get_normalized_distance(p1, c) < 0.1
+                    and get_normalized_distance(p2, c) < 0.1
+                    and get_normalized_distance(p3, c) < 0.1
+                    and get_normalized_distance(p4, c) < 0.1):
+                return (x, y)
+
+    return (-1, -1) # Returns this if the cursor was not found
+
 def img_to_playfield(img):
     """
     Convert the image from the game into the playfield list that can be solved
@@ -77,7 +106,7 @@ def playfield_to_img(playfield):
             # p1 is the top left of the rectangle
             # p2 is the bottom right of the rectangle
             p1 = (16 * x, 16 * y)
-            p2 = (16 * x + (16 - 1), 16 * y + (16 - 1))
+            p2 = (16 * (x + 1) - 1, 16 * (y + 1) - 1)
             c = colors[playfield[y][x]]
 
             cv2.rectangle(img, p1, p2, c, cv2.FILLED)

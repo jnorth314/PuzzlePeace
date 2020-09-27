@@ -8,6 +8,15 @@ import unittest
 import imager
 
 class TestImager(unittest.TestCase):
+    def test_img_to_cursor(self):
+        """
+        Test creating cursor position from an image.
+        """
+
+        img = numpy.zeros((16 * 12, 16 * 6, 3), numpy.uint8)
+
+        cursor = imager.img_to_cursor(img)
+
     def test_img_to_playfield(self):
         """
         Test creating a playfield from an image.
