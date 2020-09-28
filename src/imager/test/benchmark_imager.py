@@ -1,5 +1,5 @@
 import sys
-sys.path.insert(0, "../src/imager") # imager.py is in the src directory!
+sys.path.insert(0, "..") # imager.py is in the directory above!
 
 import cProfile
 import cv2
@@ -21,7 +21,7 @@ def benchmark_image(img):
 
 def main():
     # Directory towards my list of images!
-    dir = os.path.join(os.path.dirname(__file__), "../images")
+    dir = os.path.join(os.path.dirname(__file__), "../../../images")
 
     for i in os.listdir(dir):
         filename = "../images/{}".format(i)
