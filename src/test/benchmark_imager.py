@@ -7,7 +7,7 @@ import os
 
 import imager
 
-def benchmark_image(img):
+def benchmark_playfield(img):
     """
     Benchmark how many function calls it takes to process the playfield image
     and how long each function takes.
@@ -21,10 +21,10 @@ def benchmark_image(img):
 
 def main():
     # Directory towards my list of images!
-    dir = os.path.join(os.path.dirname(__file__), "../../../images")
+    dir = os.path.join(os.path.dirname(__file__), "../../res/playfields")
 
     for i in os.listdir(dir):
-        filename = "../images/{}".format(i)
+        filename = "../../res/playfields/{}".format(i)
         try:
             img = cv2.imread(filename)
         except:
@@ -33,7 +33,7 @@ def main():
         if (img is None):
             continue
 
-        benchmark_image(img)
+        benchmark_playfield(img)
 
 if __name__ == "__main__":
     main()

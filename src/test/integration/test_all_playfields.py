@@ -8,17 +8,17 @@ import unittest
 
 import imager
 
-class TestImages(unittest.TestCase):
-    def test_all_images(self):
+class TestPlayfields(unittest.TestCase):
+    def test_all_playfields(self):
         """
         Test all of the sample puzzles given since we have the corresponding
         JSON equal to the results!
         """
 
-        dir = os.path.join(os.path.dirname(__file__), "../../../../images")
+        dir = os.path.join(os.path.dirname(__file__), "../../../res/playfields")
 
         for p in os.listdir(dir):
-            filename = "../../../../images/{}".format(p)
+            filename = "../../../res/playfields/{}".format(p)
             try:
                 img = cv2.imread(filename)
             except:
@@ -27,7 +27,7 @@ class TestImages(unittest.TestCase):
             if (img is None):
                 continue
 
-            filename = "../../../../puzzles/{}.json".format(os.path.splitext(p)[0])
+            filename = "../../../res/puzzles/{}.json".format(os.path.splitext(p)[0])
             with open(filename) as f:
                 try:
                     puzzle = json.load(f)
