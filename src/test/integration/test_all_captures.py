@@ -16,7 +16,7 @@ class TestCaptures(unittest.TestCase):
         dir = os.path.join(os.path.dirname(__file__), "../../../res/captures")
 
         for c in os.listdir(dir):
-            filename = "../../../res/captures/{}".format(p)
+            filename = "../../../res/captures/{}".format(c)
             try:
                 img = cv2.imread(filename)
             except:
@@ -26,6 +26,6 @@ class TestCaptures(unittest.TestCase):
                 continue
 
             playfield = capture.crop_to_playfield(img)
-            
+
 if __name__ == "__main__":
     unittest.main()

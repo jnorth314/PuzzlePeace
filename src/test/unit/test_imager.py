@@ -26,6 +26,15 @@ class TestImager(unittest.TestCase):
 
         playfield = imager.img_to_playfield(img)
 
+    def test_img_to_moves(self):
+        """
+        Test creating number of moves from an image.
+        """
+
+        img = numpy.zeros((42, 48, 3), numpy.uint8)
+
+        moves = imager.img_to_moves(img)
+        
     def test_cursor_to_img(self):
         """
         Test creating an image from a cursor position.

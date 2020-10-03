@@ -81,6 +81,59 @@ def img_to_playfield(img):
 
     return playfield
 
+def img_to_moves(img):
+    """
+    Convert the image from the game into the number of moves left in the puzzle.
+
+    @param img: Image of the number of moves.
+    @return: Number of moves
+    """
+
+    c = (107, 32, 0) # Color of the font that displays the number
+
+    # This method works like reading a 7-segment display, although it would be
+    # better to have predetermined images that are compared and the best fit
+    # is chosen. This is a very poor method that happens to work with my test
+    # images. Also, only works assuming the number displayed is in range [0, 9]
+
+    # Coordinates for each light of the 7-segment display
+    segments = [
+        (29, 24), # A
+        (33, 29), # B
+        (33, 35), # C
+        (29, 40), # D
+        (25, 35), # E
+        (25, 29), # F
+        (29, 32)  # G
+    ]
+
+    # A mapping of each 7-segment display to the numbers they would be in-game
+    numbers = {
+        #0bGFEDCBA
+        0b0111111 : 0, # ABCDEF
+        0b1001001 : 1, # ADG
+        0b1011011 : 2, # ABDEG
+        0b1001111 : 3, # ABCDG
+        0b1100110 : 4, # BCFG
+        0b1101101 : 5, # ACDFG
+        0b1111101 : 6, # ACDEFG
+        0b1001011 : 7, # ABDG
+        0b1111111 : 8, # ABCDEFG
+        0b1100111 : 9  # ABCFG
+    }
+
+    n = 0 # Number showing each segment of the displayed that is turned on.
+
+    for i, (x, y) in enumerate(segments):
+        p = img[y][x]
+        if (get_normalized_distance(p, c) < 0.1):
+            n += 1 << i
+
+    if n in numbers:
+        return numbers[n]
+    else:
+        return 0
+
 def cursor_to_img(cursor):
     """
     Create an image of the cursor position to be displayed to the user!

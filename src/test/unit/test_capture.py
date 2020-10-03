@@ -17,5 +17,14 @@ class TestCapture(unittest.TestCase):
 
         playfield = capture.crop_to_playfield(img)
 
+    def test_crop_to_moves(self):
+        """
+        Test cropping an image of the capture to the move count.
+        """
+
+        img = numpy.zeros((256, 224, 3), numpy.uint8)
+
+        moves = capture.crop_to_moves(img)
+
 if __name__ == "__main__":
     unittest.main()
