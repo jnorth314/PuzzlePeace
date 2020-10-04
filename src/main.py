@@ -2,6 +2,7 @@ import cv2
 import os
 
 import capture
+import logic
 import imager
 import solver
 
@@ -32,12 +33,11 @@ def main():
         moves = imager.img_to_moves(moves_img)
 
         if solver.is_solvable(moves, playfield):
-            x, y = solver.solution[-1]
+            solved = imager.solution_to_img(playfield, solver.solution[::-1])
 
-            # Create and display the image of the solution
-            solved = imager.combined_to_img(playfield, (x, y))
             cv2.imshow("Puzzle Solution", solved)
             cv2.waitKey(0)
+            cv2.destroyWindow("Puzzle Solution")
         else:
             print("{} is not solvable!".format(c))
 

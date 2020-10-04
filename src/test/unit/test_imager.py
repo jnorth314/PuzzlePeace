@@ -34,7 +34,7 @@ class TestImager(unittest.TestCase):
         img = numpy.zeros((42, 48, 3), numpy.uint8)
 
         moves = imager.img_to_moves(img)
-        
+
     def test_cursor_to_img(self):
         """
         Test creating an image from a cursor position.
@@ -62,6 +62,16 @@ class TestImager(unittest.TestCase):
         playfield = [[0 for x in range(6)] for y in range(12)]
 
         img = imager.combined_to_img(playfield, cursor)
+
+    def test_solution_to_img(self):
+        """
+        Test creating an image showing multiple moves for a solution.
+        """
+
+        moves = [(0, 0), (1, 1), (2, 2)]
+        playfield = [[0 for x in range(6)] for y in range(12)]
+
+        img = imager.solution_to_img(playfield, moves)
 
     def test_get_normalized_distance(self):
         """

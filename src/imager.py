@@ -1,6 +1,8 @@
 import cv2
 import numpy
 
+import logic
+
 def get_normalized_distance(c1, c2):
     """
     Calculate the euclidean distance between the colors.
@@ -210,5 +212,33 @@ def combined_to_img(playfield, cursor):
     c = (255, 251, 255) # Cursor color
 
     cv2.rectangle(img, p1, p2, c, 2)
+
+    return img
+
+def solution_to_img(playfield, moves):
+    """
+    Create an image to show all moves of the solution to the puzzle at the same
+    time by concatenating them horizontally.
+
+    @param playfield: State of the playfield.
+    @param moves: A list of positions corresponding to cursor positions
+    @return: Image of all of the moves
+    """
+
+    # Creating a temp so playfield does not become clobbered
+    temp = [i[:] for i in playfield]
+
+    img = []
+    for x, y in moves:
+        img.append(combined_to_img(temp, (x, y)))
+
+        temp[y][x], temp[y][x + 1] = temp[y][x + 1], temp[y][x]
+        while (logic.clear_matches(temp) or logic.fall_blocks(temp)):
+            pass
+
+    #TODO: It would probably be best to separate them with a line before
+    # concatenation so it is easier to determine which playfield is which.
+    
+    img = cv2.hconcat(img)
 
     return img
