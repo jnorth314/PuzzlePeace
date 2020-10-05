@@ -116,8 +116,8 @@ def img_to_moves(img):
         0b1001001 : 1, # ADG
         0b1011011 : 2, # ABDEG
         0b1001111 : 3, # ABCDG
-        0b1100110 : 4, # BCFG
-        0b1101101 : 5, # ACDFG
+        0b0110111 : 4, # ABCEF
+        0b0101101 : 5, # ACDF
         0b1111101 : 6, # ACDEFG
         0b1001011 : 7, # ABDG
         0b1111111 : 8, # ABCDEFG
@@ -238,7 +238,7 @@ def solution_to_img(playfield, moves):
 
     #TODO: It would probably be best to separate them with a line before
     # concatenation so it is easier to determine which playfield is which.
-    
+
     img = cv2.hconcat(img)
 
     return img
