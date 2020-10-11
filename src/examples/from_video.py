@@ -1,3 +1,6 @@
+import sys
+sys.path.insert(0, "..") # src is in the directory above!
+
 import cv2
 import os
 import win32gui
@@ -14,8 +17,8 @@ def main():
     hwnd = win32gui.FindWindow(None, "Windowed Projector (Source) - Game Capture")
     rect = capture.get_window_rect(hwnd)
 
-    prev_moves = None
-    prev_playfield = None
+    # State of the game in the previous captured frame.
+    previous = (None, None)
 
     # Constantly be monitoring that window to solve the puzzles as they come
     # across the game feed.
@@ -23,12 +26,11 @@ def main():
         img = capture.capture_window(hwnd, rect)
 
         # Pull the important image information from the capture
-        playfield_img = capture.crop_to_playfield(img)
-        moves_img = capture.crop_to_moves(img)
+        images = (capture.crop_to_moves(img), capture.crop_to_playfield(img))
 
         # Process these smaller images into the game states
-        playfield = imager.img_to_playfield(playfield_img)
-        moves = imager.img_to_moves(moves_img)
+        moves = imager.img_to_moves(images[0])
+        playfield = imager.img_to_playfield(images[1])
 
         # Inbetween puzzles the count will be 0, we can't solve and shouldn't
         if (moves == 0):
@@ -40,14 +42,14 @@ def main():
 
         # To prevent reevaluating the same puzzle that we just displayed an
         # an image for, we should just continue until we find a new one.
-        if (prev_moves == moves and prev_playfield == playfield):
+        if (previous[0] == moves or previous[1] == playfield):
             continue
         else:
-            prev_moves = moves
-            prev_playfield = [i[:] for i in playfield]
+            previous = (moves, [i[:] for i in playfield])
 
         if solver.is_solvable(moves, playfield):
             solved = imager.combined_to_img(playfield, solver.solution[-1])
+            #solved = imager.solution_to_img(playfield, solver.solution[::-1])
 
             cv2.imshow("Puzzle Solution", solved)
             cv2.waitKey(1)
