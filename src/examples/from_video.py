@@ -2,10 +2,12 @@ import sys
 sys.path.insert(0, "..") # src is in the directory above!
 
 import cv2
+import keyboard
 import os
 import win32gui
 
 import capture
+import control
 import logic
 import imager
 import solver
@@ -31,6 +33,16 @@ def main():
         # Process these smaller images into the game states
         moves = imager.img_to_moves(images[0])
         playfield = imager.img_to_playfield(images[1])
+        cursor = imager.img_to_cursor(images[1])
+
+        # Waits for a specific hotkey on the keyboard for automated control of
+        # the game, there are also additional checks making sure that a solution
+        # does exist and it properly read the cursor position.
+        if (keyboard.is_pressed("q")
+                and len(solver.solution) > 0
+                and cursor[0] != -1
+                and cursor[1] != -1):
+            control.make_move(cursor, solver.solution[-1])
 
         # Inbetween puzzles the count will be 0, we can't solve and shouldn't
         if (moves == 0):
@@ -42,7 +54,7 @@ def main():
 
         # To prevent reevaluating the same puzzle that we just displayed an
         # an image for, we should just continue until we find a new one.
-        if (previous[0] == moves or previous[1] == playfield):
+        if (previous[0] == moves and previous[1] == playfield):
             continue
         else:
             previous = (moves, [i[:] for i in playfield])
