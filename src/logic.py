@@ -44,7 +44,7 @@ def fall_blocks(playfield):
     @return: Status if any empty gaps were removed.
     """
 
-    temp = [[0 for x in range(6)] for y in range(12)]
+    temp = [[0] * 6 for y in range(12)]
 
     # Go through each column and start placing blocks at the lowest available
     # row. Since the lowest available row is the largest number, we decrement
@@ -73,4 +73,4 @@ def is_solved(playfield):
     @return: Status if the playfield is empty.
     """
 
-    return any(map(any, playfield)) == False
+    return not any(map(any, playfield))

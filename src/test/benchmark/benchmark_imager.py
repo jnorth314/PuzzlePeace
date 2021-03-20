@@ -1,5 +1,5 @@
 import sys
-sys.path.insert(0, "..") # imager.py is in the directory above!
+sys.path.insert(0, "../..") # imager.py is in the directory above!
 
 import cProfile
 import cv2
@@ -21,10 +21,10 @@ def benchmark_playfield(img):
 
 def main():
     # Directory towards my list of images!
-    dir = os.path.join(os.path.dirname(__file__), "../../res/playfields")
+    dir = os.path.join(os.path.dirname(__file__), "../../../res/playfields")
 
     for i in os.listdir(dir):
-        filename = "../../res/playfields/{}".format(i)
+        filename = "../../../res/playfields/{}".format(i)
         try:
             img = cv2.imread(filename)
         except:

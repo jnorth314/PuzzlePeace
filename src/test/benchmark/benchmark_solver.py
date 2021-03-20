@@ -1,5 +1,5 @@
 import sys
-sys.path.insert(0, "..") # solver.py is in the directory above!
+sys.path.insert(0, "../..") # solver.py is in the directory above!
 
 import cProfile
 import json
@@ -24,10 +24,10 @@ def benchmark_puzzle(puzzle):
 
 def main():
     # Directory towards my list of puzzles!
-    dir = os.path.join(os.path.dirname(__file__), "../../res/puzzles")
+    dir = os.path.join(os.path.dirname(__file__), "../../../res/puzzles")
 
     for p in os.listdir(dir):
-        filename = "../../res/puzzles/{}".format(p)
+        filename = "../../../res/puzzles/{}".format(p)
         with open(filename) as f:
             try:
                 puzzle = json.load(f)
