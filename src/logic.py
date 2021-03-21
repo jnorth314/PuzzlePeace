@@ -18,15 +18,11 @@ def clear_matches(playfield):
 
             # Horizontal
             if (x < (6 - 2) and playfield[y][x] == playfield[y][x + 1] and playfield[y][x] == playfield[y][x + 2]):
-                temp[y][x] = 0
-                temp[y][x + 1] = 0
-                temp[y][x + 2] = 0
+                temp[y][x] = temp[y][x + 1] = temp[y][x + 2] = 0
 
             # Vertical
             if (y < (12 - 2) and playfield[y][x] == playfield[y + 1][x] and playfield[y][x] == playfield[y + 2][x]):
-                temp[y][x] = 0
-                temp[y + 1][x] = 0
-                temp[y + 2][x] = 0
+                temp[y][x] = temp[y + 1][x] = temp[y + 2][x] = 0
 
     # Check if any of the blocks cleared, if they did we need to copy them back
     # over to the playfield.
