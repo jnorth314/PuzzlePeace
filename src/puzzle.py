@@ -12,7 +12,7 @@ class PuzzleJSON(TypedDict):
 class Puzzle:
     """Class definition describing a playfield puzzle with a given layout"""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.moves = 0
         self.playfields: list[Playfield] = []
         self.solution: list[tuple[int, int]] = []
