@@ -1,3 +1,10 @@
+# Output of Coverage Reports
+.coverage
+htmlcov/
+
 # Python Cache Files
 __pycache__/
 .pyc
+
+# VSCode settings
+.vscode/
