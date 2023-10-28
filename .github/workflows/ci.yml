@@ -56,7 +56,7 @@ jobs:
       with:
         name: PuzzlePeace-Coverage
         path: htmlcov/
-mypy:
+  mypy:
     runs-on: ubuntu-latest
     strategy:
       matrix:
