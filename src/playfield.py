@@ -1,7 +1,7 @@
 class Playfield:
     """Class describing the layout of a playfield and its logic"""
 
-    def __init__(self, width: int=6, height: int=12):
+    def __init__(self, width: int=6, height: int=12) -> None:
         self.width = width
         self.height = height
         self.blocks: list[list[int]] = [[0 for _ in range(width)] for _ in range(height)]

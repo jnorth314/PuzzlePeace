@@ -2,6 +2,9 @@
 .coverage
 htmlcov/
 
+# Output of mypy
+.mypy_cache/
+
 # Python Cache Files
 __pycache__/
 .pyc
