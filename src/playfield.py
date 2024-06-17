@@ -51,7 +51,9 @@ class Playfield:
     def update(self) -> None:
         """Update the playfield until it is in a stable state"""
 
-        while self.fall() or self.match():
+        self.fall()
+
+        while self.match() and self.fall():
             pass
 
     def is_empty(self) -> bool:
