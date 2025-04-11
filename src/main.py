@@ -11,7 +11,7 @@ def main() -> None:
     puzzle.load_from_json_file(path_to_puzzle)
     puzzle.solve()
 
-    for move, (x, y) in enumerate(puzzle.solution, start=1): # pylint: disable=invalid-name
+    for move, (x, y) in enumerate(puzzle.solution, start=1):
         print(f"Move {move}: {x}, {y}")
 
 if __name__ == "__main__":
