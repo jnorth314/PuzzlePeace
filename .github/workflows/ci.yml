@@ -1,9 +1,6 @@
 name: Continuous Integration (CI)
 
 on:
-  push:
-    branches:
-      - master
   pull_request:
 
 jobs:
@@ -26,7 +23,7 @@ jobs:
         pip install pylint
     - name: Analysing the code with pylint
       run: |
-        pylint $(find ./src/ -name "*.py" | xargs)
+        pylint ./src --recursive y
   Unittest:
     runs-on: ubuntu-latest
     strategy:
@@ -44,6 +41,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install wheel
         pip install coverage[toml]
+    - name: Setting PYTHONPATH
+      run: |
+        echo "PYTHONPATH=$GITHUB_WORKSPACE/src" >> $GITHUB_ENV
     - name: Analysing the code with unittest
       run: |
         coverage run ./tools/run_all_tests.py
